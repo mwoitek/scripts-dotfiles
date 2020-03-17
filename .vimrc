@@ -41,8 +41,9 @@ filetype plugin on
 " na parte de baixo da tela:
 :set showcmd
 
-" Destaca o texto que está sendo buscado:
+" Destaca o texto quando realizo uma busca:
 :set hlsearch
+:set incsearch
 
 " Minhas configurações de indentação:
 set expandtab
