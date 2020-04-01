@@ -23,16 +23,16 @@
 
 # Roda o meu script do Bash
 # para atualizar programas no Debian:
-alias atual="sudo /home/woitek/scripts_dotfiles/atual.sh"
+alias atual="sudo $HOME/atual.sh"
 
 # Comando cp personalizado:
-alias cp="cp --verbose"
+alias cp="cp --interactive --verbose"
 
 # Comando ls personalizado:
 alias ls="ls -Aghoprt --time-style=iso"
 
 # Comando mv personalizado:
-alias mv="mv --verbose"
+alias mv="mv --interactive --verbose"
 
 # Comando rm personalizado:
-alias rm="rm --verbose"
+alias rm="rm --interactive --verbose"

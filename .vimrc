@@ -51,7 +51,28 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 
+" Quando a tecla F3 é pressionada,
+" desabilita temporariamente
+" o destaque do texto buscado:
+nnoremap <F3> :noh<CR>
+
 " Quando a tecla F5 é pressionada,
 " remove espaços desnecessários
 " nos finais das linhas:
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" Quando um arquivo é salvo,
+" remove espaços desnecessários
+" nos finais das linhas:
+autocmd BufWritePre * %s/\s\+$//e
+
+" No modo de inserção,
+" faz ii funcionar como a tecla ESC:
+:imap ii <Esc>
+
+" Configurações do plugin lightline:
+set laststatus=2
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
