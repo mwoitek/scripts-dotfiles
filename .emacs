@@ -29,18 +29,22 @@
  '(custom-safe-themes
    (quote
     ("dd2346baba899fa7eee2bba4936cfcdf30ca55cdc2df0a1a4c9808320c4d4b22" default)))
+ '(display-line-numbers-type (quote relative))
  '(display-time-mode t)
- '(global-linum-mode t)
+ '(global-display-line-numbers-mode t)
+ '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines t)
- '(package-selected-packages
-   (quote
-    (sml-mode yasnippet s pyvenv highlight-indentation find-file-in-project company abyss-theme)))
+ '(line-number-mode nil)
+ '(package-selected-packages (quote (sml-mode abyss-theme)))
  '(save-place nil nil (saveplace))
  '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(size-indication-mode t)
  '(tool-bar-mode nil)
- '(tool-bar-position (quote top)))
+ '(tool-bar-position (quote top))
+ '(tooltip-mode nil))
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 143 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 150 :width normal)))))
 ;; Abre o emacs sem mostrar a mensagem de inicialização:
 (setq inhibit-startup-message t)
 ;; Abre o emacs maximizado:

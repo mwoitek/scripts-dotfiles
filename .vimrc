@@ -23,56 +23,92 @@
 "
 " Meu arquivo de configuração do vim.
 
+" Configuração básica:
 set nocompatible
+set encoding=utf-8
+set t_Co=256
 
-" Roda o gerenciador de plugins Pathogen:
-execute pathogen#infect()
+" Usa o vim-plug para carregar os plugins:
+call plug#begin('$HOME/.vim/bundle/')
+Plug 'chrisbra/colorizer'
+Plug 'Raimondi/delimitMate'
+Plug 'itchyny/lightline.vim'
+Plug 'unblevable/quick-scope'
+Plug 'tpope/vim-commentary'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-surround'
+call plug#end()
+
+" Configuração do lightline:
+set laststatus=2
+set noshowmode
+let g:lightline={'colorscheme': 'seoul256'}
 
 " Habilita o destaque de sintaxe:
 syntax on
 filetype plugin on
 
-" Mostra o número da linha atual
-" e a posição relativa das outras linhas:
-:set number
-:set relativenumber
+" Mostra o número da linha atual e a posição relativa das outras linhas:
+set number
+set relativenumber
 
-" Mostra os comandos parciais
-" na parte de baixo da tela:
-:set showcmd
+" Mostra os comandos parciais na parte de baixo da tela:
+set showcmd
 
 " Destaca o texto quando realizo uma busca:
-:set hlsearch
-:set incsearch
+set hlsearch
+set incsearch
 
-" Minhas configurações de indentação:
+" Configuração de indentação:
 set expandtab
 set shiftwidth=2
 set softtabstop=2
 set autoindent
 
-" Quando a tecla F3 é pressionada,
-" desabilita temporariamente
-" o destaque do texto buscado:
-nnoremap <F3> :noh<CR>
+" Dá acesso à área de transferência:
+set clipboard+=unnamedplus
 
-" Quando a tecla F5 é pressionada,
-" remove espaços desnecessários
-" nos finais das linhas:
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" Quando um arquivo é salvo,
-" remove espaços desnecessários
-" nos finais das linhas:
+" Quando um arquivo é salvo, remove espaços desnecessários nos finais das linhas:
 autocmd BufWritePre * %s/\s\+$//e
 
-" No modo de inserção,
-" faz ii funcionar como a tecla ESC:
-:imap ii <Esc>
+" ATALHOS DE TECLADO.
 
-" Configurações do plugin lightline:
-set laststatus=2
-set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ }
+" Usa a vírgula como a tecla líder:
+let mapleader=","
+
+" No modo de inserção, faz ii funcionar como a tecla ESC:
+inoremap ii <Esc>
+
+" <leader>+h --- Desabilita temporariamente o destaque do texto buscado:
+nnoremap <leader>h :noh<CR>
+
+" <leader>+t --- Remove espaços desnecessários nos finais das linhas:
+nnoremap <leader>t :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" <leader>+q --- Fecha o vim:
+nnoremap <leader>q :q<CR>
+
+" <leader>+w --- Salva o arquivo:
+nnoremap <leader>w :w<CR>
+
+" <leader>+z --- Salva o arquivo e fecha o vim:
+nnoremap <leader>z :wq<CR>
+
+" ATALHOS PARA INTERAGIR COM A ÁREA DE TRANSFERÊNCIA.
+
+" <leader>+c --- Copia:
+vnoremap <leader>c "+y
+
+" <leader>+d --- Corta:
+vnoremap <leader>d "+d
+
+" <leader>+v --- Cola:
+inoremap <leader>v <ESC>"+pa
+
+" ATALHOS PARA HABILITAR O CORRETOR ORTOGRÁFICO.
+
+" <leader>+e --- Habilita a ferramenta para corrigir um texto em INGLÊS:
+nnoremap <leader>e :setlocal spell! spelllang=en_us<CR>
+
+" <leader>+p --- Habilita a ferramenta para corrigir um texto em PORTUGUÊS:
+nnoremap <leader>p :setlocal spell! spelllang=pt_br<CR>

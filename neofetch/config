@@ -22,7 +22,6 @@ print_info() {
     info line_break
 }
 
-
 # Kernel
 
 kernel_shorthand="off"

@@ -1,33 +1,52 @@
 [global_config]
   borderless = True
+  broadcast_default = off
   extra_styling = False
-  homogeneous_tabbar = False
-  scroll_tabbar = True
-  tab_position = hidden
-  title_font = Cantarell 16
+  suppress_multiple_term_dialog = True
   title_hide_sizetext = True
-  window_state = fullscreen
+  window_state = maximise
 [keybindings]
+  insert_number = ""
+  switch_to_tab_1 = <Super>1
+  switch_to_tab_2 = <Super>2
+  switch_to_tab_3 = <Super>3
+  switch_to_tab_4 = <Super>4
+  switch_to_tab_5 = <Super>5
+  switch_to_tab_6 = <Super>6
+  switch_to_tab_7 = <Super>7
+  switch_to_tab_8 = <Super>8
+  switch_to_tab_9 = <Super>9
 [layouts]
   [[default]]
     [[[child1]]]
-      parent = window0
+      parent = window1
+      type = Notebook
+    [[[child2]]]
+      order = 0
+      parent = child1
       profile = default
       type = Terminal
-    [[[window0]]]
+    [[[child3]]]
+      order = 1
+      parent = child1
+      profile = default
+      type = Terminal
+    [[[window1]]]
+      last_active_window = True
       parent = ""
       type = Window
 [plugins]
 [profiles]
   [[default]]
     background_darkness = 0.9
+    background_type = transparent
     copy_on_selection = True
-    cursor_color = "#cc0000"
+    cursor_color = "#cc241d"
     font = DejaVu Sans Mono 15
-    foreground_color = "#cc0000"
+    foreground_color = "#cc241d"
     icon_bell = False
     palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
-    scroll_on_output = True
-    scrollback_infinite = True
+    scrollback_lines = 5000
+    scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
