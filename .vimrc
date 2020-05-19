@@ -30,13 +30,19 @@ set t_Co=256
 
 " Usa o vim-plug para carregar os plugins:
 call plug#begin('$HOME/.vim/bundle/')
-Plug 'chrisbra/colorizer'
+" Plug 'chrisbra/colorizer'
 Plug 'Raimondi/delimitMate'
+Plug 'junegunn/fzf'
 Plug 'itchyny/lightline.vim'
 Plug 'unblevable/quick-scope'
+" Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'jvirtanen/vim-octave'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
+Plug 'lervag/vimtex'
 call plug#end()
 
 " Configuração do lightline:
@@ -59,17 +65,30 @@ set showcmd
 set hlsearch
 set incsearch
 
+" Configuração de completamento automático na linha de comando:
+set wildmenu
+set wildmode=longest:full,full
+
 " Configuração de indentação:
 set expandtab
 set shiftwidth=2
 set softtabstop=2
 set autoindent
 
+" Destaca a linha e a coluna atuais:
+set cursorline
+" set cursorcolumn
+highlight CursorLine cterm=bold
+" highlight CursorColumn ctermbg=234 cterm=bold
+
 " Dá acesso à área de transferência:
 set clipboard+=unnamedplus
 
 " Quando um arquivo é salvo, remove espaços desnecessários nos finais das linhas:
 autocmd BufWritePre * %s/\s\+$//e
+
+" Quando entro no modo de inserção, centraliza a tela verticalmente:
+autocmd InsertEnter * norm zz
 
 " ATALHOS DE TECLADO.
 
@@ -87,6 +106,9 @@ nnoremap <leader>t :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " <leader>+q --- Fecha o vim:
 nnoremap <leader>q :q<CR>
+
+" <leader>+s --- Busca e substitui no arquivo inteiro:
+nnoremap <leader>s :%s///gc<Left><Left><Left><Left>
 
 " <leader>+w --- Salva o arquivo:
 nnoremap <leader>w :w<CR>

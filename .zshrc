@@ -35,13 +35,10 @@ ZSH_THEME=""
 # Carrega os plugins:
 plugins=(autojump git timer vi-mode zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+source "${ZSH}/oh-my-zsh.sh"
 
 # Habilita cores:
 autoload -U colors && colors
-
-# Carrega o plugin zsh-syntax-highlighting:
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # VARIÁVEIS DO AMBIENTE.
 
@@ -50,7 +47,7 @@ CONDA_ACTIVE=""
 NOVALINHA=$'\n'
 function zle-line-init zle-keymap-select {
     MODO="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERÇÃO}"
-    PROMPT="[%B%F{white}%n%f%b@%B%F{white}%m%f%b] [%B%F{white}%D %T%f%b] [%B%F{white}${MODO}%f%b]${NOVALINHA}[%B%F{white}%~%f%b]${NOVALINHA}[%B%F{white}%h%f%b]${CONDA_ACTIVE}> "
+    PROMPT="[%B%n%b@%B%m%b] [%B%D %T%b] [%B${MODO}%b]${NOVALINHA}[%B%~%b]${NOVALINHA}[%B%h%b]${CONDA_ACTIVE}> "
     zle reset-prompt
 }
 zle -N zle-line-init
@@ -73,22 +70,44 @@ export TIMER_PRECISION=3
 
 [ -f /opt/conda/etc/profile.d/conda.sh ] && source /opt/conda/etc/profile.d/conda.sh
 
-# Ativa o meu ambiente do conda:
+# Ativa um dos meus ambientes do conda:
 aconda () {
-    conda activate env1
-    CONDA_ACTIVE=" %F{green}[%BCONDA%b]%f"
+    conda activate "$1"
+    CONDA_ACTIVE=" [%BCONDA --- $2 ($1)%b]"
 }
 
-# Desativa o meu ambiente do conda:
+# Desativa um ambiente do conda:
 dconda () {
     conda deactivate
     CONDA_ACTIVE=""
 }
 
+# Comando para usar os programas instalados como pacotes snap:
+[ -d /snap/bin ] && export PATH="${PATH}:/snap/bin"
+
+# Comando para usar o trash-cli:
+[ -d "${HOME}/.local/bin" ] && export PATH="${PATH}:${HOME}/.local/bin"
+
 # ALIASES.
 
-alias ac="aconda"
+# CONDA.
+
+alias ac-c="aconda env2 C/C++"
+alias ac-py="aconda env1 PYTHON"
 alias dc="dconda"
+
+# LSD.
+
+alias l="lsd -l"
+alias la="lsd -A"
+alias lla="lsd -lA"
+alias lt="lsd --tree"
+
+# TRASH-CLI.
+
+alias te="trash-empty"
+alias tl="trash-list"
+alias tp="trash-put"
 
 # Aliases que defini para o Bash:
 [ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases"
@@ -110,3 +129,6 @@ lfcd () {
     fi
 }
 bindkey -s "^o" "lfcd\n"
+
+# Carrega o plugin zsh-syntax-highlighting:
+[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
