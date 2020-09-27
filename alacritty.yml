@@ -4,30 +4,28 @@ env:
   TERM: xterm-256color
 
 window:
+  decorations: none
   dimensions:
     columns: 110
-    lines: 31
-  decorations: false
+    lines: 35
+  dynamic_title: false
+  startup_mode: Maximized
 
 scrolling:
   history: 10000
   multiplier: 3
-  faux_multiplier: 3
-  auto_scroll: true
-
-tabspaces: 2
 
 draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: UbuntuMono Nerd Font Mono
-    style: Regular
+    family: CodeNewRoman Nerd Font Mono
+    style: Book
   bold:
-    family: UbuntuMono Nerd Font Mono
+    family: CodeNewRoman Nerd Font Mono
     style: Bold
   italic:
-    family: UbuntuMono Nerd Font Mono
+    family: CodeNewRoman Nerd Font Mono
     style: Italic
   size: 15.0
   offset:
@@ -35,34 +33,39 @@ font:
     y: 3
   scale_with_dpi: true
 
-render_timer: false
-
-# Monokai Dark.
 colors:
-  # Default colors.
   primary:
-    background: "#272822"
-    foreground: "#F8F8F2"
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
   normal:
-    black:   "#272822"
-    red:     "#F92672"
-    green:   "#A6E22E"
-    yellow:  "#F4BF75"
-    blue:    "#66D9EF"
-    magenta: "#AE81FF"
-    cyan:    "#A1EFE4"
-    white:   "#F8F8F2"
+    black: '0x000000'
+    blue: '0xbd93f9'
+    cyan: '0x8be9fd'
+    green: '0x50fa7b'
+    magenta: '0xff79c6'
+    red: '0xff5555'
+    white: '0xbbbbbb'
+    yellow: '0xf1fa8c'
   bright:
-    black:   "#75715E"
-    red:     "#F92672"
-    green:   "#A6E22E"
-    yellow:  "#F4BF75"
-    blue:    "#66D9EF"
-    magenta: "#AE81FF"
-    cyan:    "#A1EFE4"
-    white:   "#F9F8F5"
+    black: '0x555555'
+    blue: '0xcaa9fa'
+    cyan: '0x8be9fd'
+    green: '0x50fa7b'
+    magenta: '0xff79c6'
+    red: '0xff5555'
+    white: '0xffffff'
+    yellow: '0xf1fa8c'
+  cursor:
+    cursor: CellForeground
+    text: CellBackground
+  vi_mode_cursor:
+    cursor: CellForeground
+    text: CellBackground
+  selection:
+    background: CellForeground
+    text: CellBackground
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -73,13 +76,14 @@ mouse:
   triple_click: { threshold: 300 }
 
 selection:
+  save_to_clipboard: true
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-dynamic_title: false
 
 hide_cursor_when_typing: true
 
-cursor_style: Block
+cursor:
+  style: Block
+  unfocused_hollow: true
 
 unfocused_hollow_cursor: false
 
