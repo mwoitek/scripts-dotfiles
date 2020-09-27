@@ -28,22 +28,31 @@ set nocompatible
 set encoding=utf-8
 set t_Co=256
 
+" Especifica a localização do binário do Python:
+let g:python3_host_prog='/home/woitek/miniconda3/envs/env1/bin/python3'
+
 " Usa o vim-plug para carregar os plugins:
 call plug#begin('$HOME/.vim/bundle/')
-" Plug 'chrisbra/colorizer'
+" Plug 'jvirtanen/vim-octave'
+" Plug 'lervag/vimtex'
 Plug 'Raimondi/delimitMate'
-Plug 'junegunn/fzf'
-Plug 'itchyny/lightline.vim'
-Plug 'unblevable/quick-scope'
-" Plug 'godlygeek/tabular'
-Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
-" Plug 'nathanaelkane/vim-indent-guides'
-Plug 'jvirtanen/vim-octave'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'lervag/vimtex'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 call plug#end()
+
+" Ativa o deoplete:
+let g:deoplete#enable_at_startup=1
 
 " Configuração do lightline:
 set laststatus=2
@@ -71,15 +80,13 @@ set wildmode=longest:full,full
 
 " Configuração de indentação:
 set expandtab
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set autoindent
 
-" Destaca a linha e a coluna atuais:
+" Destaca a linha atual:
 set cursorline
-" set cursorcolumn
 highlight CursorLine cterm=bold
-" highlight CursorColumn ctermbg=234 cterm=bold
 
 " Dá acesso à área de transferência:
 set clipboard+=unnamedplus
@@ -93,10 +100,7 @@ autocmd InsertEnter * norm zz
 " ATALHOS DE TECLADO.
 
 " Usa a vírgula como a tecla líder:
-let mapleader=","
-
-" No modo de inserção, faz ii funcionar como a tecla ESC:
-inoremap ii <Esc>
+let mapleader=','
 
 " <leader>+h --- Desabilita temporariamente o destaque do texto buscado:
 nnoremap <leader>h :noh<CR>
@@ -115,17 +119,6 @@ nnoremap <leader>w :w<CR>
 
 " <leader>+z --- Salva o arquivo e fecha o vim:
 nnoremap <leader>z :wq<CR>
-
-" ATALHOS PARA INTERAGIR COM A ÁREA DE TRANSFERÊNCIA.
-
-" <leader>+c --- Copia:
-vnoremap <leader>c "+y
-
-" <leader>+d --- Corta:
-vnoremap <leader>d "+d
-
-" <leader>+v --- Cola:
-inoremap <leader>v <ESC>"+pa
 
 " ATALHOS PARA HABILITAR O CORRETOR ORTOGRÁFICO.
 
