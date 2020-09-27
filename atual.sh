@@ -19,11 +19,9 @@
 #
 #
 #
-# Script que atualiza os programas
-# nos meus computadores que rodam o Debian.
+# Script que atualiza os programas nos meus computadores que rodam o Debian.
 # É preciso ser root para rodar este script.
-
 apt-get update
 apt-get upgrade -y
-apt-get clean
 apt-get autoremove -y
+apt-get clean
