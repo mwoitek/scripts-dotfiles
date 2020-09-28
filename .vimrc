@@ -29,7 +29,8 @@ set encoding=utf-8
 set t_Co=256
 
 " Especifica a localização do binário do Python:
-let g:python3_host_prog='/home/woitek/miniconda3/envs/env1/bin/python3'
+let g:python3_host_prog='/home/woitek/.conda/envs/env1/bin/python3'
+" let g:python3_host_prog='/home/woitek/miniconda3/envs/env1/bin/python3'
 
 " Usa o vim-plug para carregar os plugins:
 call plug#begin('$HOME/.vim/bundle/')
@@ -37,9 +38,12 @@ call plug#begin('$HOME/.vim/bundle/')
 " Plug 'lervag/vimtex'
 Plug 'Raimondi/delimitMate'
 Plug 'easymotion/vim-easymotion'
+Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'szymonmaszke/vimpyter'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 if has('nvim')
@@ -51,6 +55,8 @@ else
 endif
 call plug#end()
 
+colorscheme molokai_dark
+
 " Ativa o deoplete:
 let g:deoplete#enable_at_startup=1
 
@@ -59,9 +65,20 @@ set laststatus=2
 set noshowmode
 let g:lightline={'colorscheme': 'seoul256'}
 
+" Configuração do vimtex:
+" let g:tex_flavor='latex'
+" let g:vimtex_compiler_progname='/home/woitek/.conda/envs/env1/bin/nvr'
+" let g:vimtex_indent_enabled=0
+" let g:vimtex_indent_ignored_envs=['align', 'align*', 'block', 'document',
+"                                 \ 'equation', 'equation*', 'figure', 'frame', 'itemize']
+" let g:vimtex_indent_on_ampersands=0
+" let g:vimtex_quickfix_autoclose_after_keystrokes=1
+" let g:vimtex_view_method='zathura'
+
 " Habilita o destaque de sintaxe:
 syntax on
 filetype plugin on
+autocmd BufNewFile,BufRead *.m set syntax=octave
 
 " Mostra o número da linha atual e a posição relativa das outras linhas:
 set number
@@ -80,9 +97,9 @@ set wildmode=longest:full,full
 
 " Configuração de indentação:
 set expandtab
+set noautoindent
 set shiftwidth=4
 set softtabstop=4
-set autoindent
 
 " Destaca a linha atual:
 set cursorline
