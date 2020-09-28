@@ -35,7 +35,7 @@ ZSH_THEME=""
 # Carrega os plugins:
 plugins=(autojump extract git timer vi-mode zsh-autosuggestions)
 
-source "${ZSH}/oh-my-zsh.sh"
+source "${ZSH}/oh-my-zsh.sh" 2> /dev/null
 
 # Habilita cores:
 autoload -U colors && colors
@@ -80,8 +80,8 @@ export TIMER_PRECISION=2
 
 # CONDA.
 
-[ -f "${HOME}/miniconda3/etc/profile.d/conda.sh" ] && source "${HOME}/miniconda3/etc/profile.d/conda.sh"
-[ -f /opt/conda/etc/profile.d/conda.sh ] && source /opt/conda/etc/profile.d/conda.sh
+[ -f "${HOME}/miniconda3/etc/profile.d/conda.sh" ] && source "${HOME}/miniconda3/etc/profile.d/conda.sh" 2> /dev/null
+[ -f /opt/conda/etc/profile.d/conda.sh ] && source /opt/conda/etc/profile.d/conda.sh 2> /dev/null
 
 # Ativa um dos meus ambientes do conda:
 aconda () {
@@ -98,17 +98,18 @@ dconda () {
 # FZF.
 
 # Comando para usar os recursos do fzf:
-[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
+[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh" 2> /dev/null
 
 # ALIASES.
 
 # Aliases que defini para o Bash:
-[ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases"
+[ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases" 2> /dev/null
 
 # CONDA.
 
 alias ac-c="aconda env2 C/C++"
 alias ac-py="aconda env1 PYTHON"
+alias ac-r="aconda env3 R"
 alias dc="dconda"
 
 # LSD.
