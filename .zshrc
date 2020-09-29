@@ -133,3 +133,5 @@ _comp_options+=(globdots)
 
 # Carrega o plugin zsh-syntax-highlighting:
 [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+ac-py
