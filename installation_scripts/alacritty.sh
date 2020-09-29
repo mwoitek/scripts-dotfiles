@@ -16,13 +16,7 @@ sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
 sudo mkdir -p /usr/local/share/man/man1 && gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 # mkdir -p ${ZDOTDIR:-~}/.zsh_functions && echo 'fpath+=${ZDOTDIR:-~}/.zsh_functions' >> ${ZDOTDIR:-~}/.zshrc
 # cp extra/completions/_alacritty ${ZDOTDIR:-~}/.zsh_functions/_alacritty
-if [ ! -d ~/.local/share/applications ]; then
-    mkdir -p ~/.local/share/applications
-fi
+[[ ! -d ~/.local/share/applications ]] && mkdir -p ~/.local/share/applications
 cp ~/alacritty/extra/linux/Alacritty.desktop ~/.local/share/applications/.
-if [ ! -d ~/.config/alacritty ]; then
-    mkdir -p ~/.config/alacritty
-fi
-if [ -f ~/scripts-dotfiles/alacritty.yml ]; then
-    cp ~/scripts-dotfiles/alacritty.yml ~/.config/alacritty/.
-fi
+[[ ! -d ~/.config/alacritty ]] && mkdir -p ~/.config/alacritty
+[[ -f ~/scripts-dotfiles/alacritty.yml ]] && cp ~/scripts-dotfiles/alacritty.yml ~/.config/alacritty/.
