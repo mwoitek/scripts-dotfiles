@@ -26,32 +26,31 @@
 
 # CONFIGURAÇÃO RELACIONADA COM O OH-MY-ZSH.
 
-# Diretório de instalação do oh-my-zsh:
-export ZSH="${HOME}/.oh-my-zsh"
-
 # Desabilita os temas:
 ZSH_THEME=""
 
 # Carrega os plugins:
-plugins=(autojump extract git timer vi-mode zsh-autosuggestions)
+plugins=(autojump extract timer vi-mode zsh-autosuggestions)
 
 source "${ZSH}/oh-my-zsh.sh" 2> /dev/null
+
+# Carrega o plugin zsh-syntax-highlighting:
+if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null
+fi
+
+# Configuração do plugin timer:
+export TIMER_FORMAT="[%d]"
+export TIMER_PRECISION=2
+
+# Variável para evitar um comportamento estranho no vi-mode:
+export KEYTIMEOUT=1
 
 # Habilita cores:
 autoload -U colors && colors
 
-# VARIÁVEIS DO AMBIENTE.
-
-export PATH="$PATH:/usr/sbin"
-
-# Comando para usar os programas instalados como pacotes snap:
-[ -d /snap/bin ] && export PATH="${PATH}:/snap/bin"
-
-# Comando para usar o trash-cli:
-[ -d "${HOME}/.local/bin" ] && export PATH="${PATH}:${HOME}/.local/bin"
-
 # Customiza o prompt:
-CONDA_ACTIVE=""
+export CONDA_ACTIVE=""
 NOVALINHA=$'\n'
 function zle-line-init zle-keymap-select {
     MODO="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
@@ -62,76 +61,22 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 PS2="> "
 
-# Variável para evitar um comportamento estranho no vi-mode:
-export KEYTIMEOUT=1
-
-# Define o meu editor padrão:
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-
-# Configuração do comando history:
-export HISTSIZE=20000
-export SAVEHIST=$HISTSIZE
-export HISTFILE="${HOME}/.zsh_history"
-
-# Configuração do plugin timer:
-export TIMER_FORMAT="[%d]"
-export TIMER_PRECISION=2
-
-# CONDA.
-
-[ -f "${HOME}/miniconda3/etc/profile.d/conda.sh" ] && source "${HOME}/miniconda3/etc/profile.d/conda.sh" 2> /dev/null
-[ -f /opt/conda/etc/profile.d/conda.sh ] && source /opt/conda/etc/profile.d/conda.sh 2> /dev/null
-
-# Ativa um dos meus ambientes do conda:
-aconda () {
-    conda activate "$1"
-    CONDA_ACTIVE=" [%BCONDA --- $2 ($1)%b]"
-}
-
-# Desativa um ambiente do conda:
-dconda () {
-    conda deactivate
-    CONDA_ACTIVE=""
-}
-
-# FZF.
-
-# Comando para usar os recursos do fzf:
-[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh" 2> /dev/null
-
-# ALIASES.
-
-# Aliases que defini para o Bash:
-[ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases" 2> /dev/null
-
-# CONDA.
-
-alias ac-c="aconda env2 C/C++"
-alias ac-py="aconda env1 PYTHON"
-alias ac-r="aconda env3 R"
-alias dc="dconda"
-
-# LSD.
-
-alias l="lsd -l"
-alias la="lsd -A"
-alias lla="lsd -lA"
-alias lt="lsd --tree"
-
-# TRASH-CLI.
-
-alias te="trash-empty"
-alias tl="trash-list"
-alias tp="trash-put"
-
 # Configuração do completamento automático:
 zstyle ":completion:*" menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
-# Carrega o plugin zsh-syntax-highlighting:
-[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# Comando para usar os recursos do conda:
+[[ -f "${HOME}/.conda.zsh" ]] && source "${HOME}/.conda.zsh" 2> /dev/null
+
+# Comando para usar os recursos do fzf:
+[[ -f "${HOME}/.fzf.zsh" ]] && source "${HOME}/.fzf.zsh" 2> /dev/null
+
+# Aliases que defini para o bash:
+[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases" 2> /dev/null
+
+# Aliases que defini para o zsh:
+[[ -f "${HOME}/.zsh_aliases" ]] && source "${HOME}/.zsh_aliases" 2> /dev/null
 
 ac-py
