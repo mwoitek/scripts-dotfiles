@@ -20,7 +20,7 @@
 # Meus aliases do Bash.
 # Depois de editar este arquivo, rode o seguinte comando: . ~/.bashrc
 # Roda o meu script do Bash para atualizar programas no Debian:
-alias atual="sudo ${HOME}/atual.sh"
+alias atual="${HOME}/atual.sh"
 # Comando cp personalizado:
 alias cp="cp --interactive --verbose"
 # Comando mv personalizado:

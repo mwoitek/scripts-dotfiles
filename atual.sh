@@ -20,8 +20,13 @@
 #
 #
 # Script que atualiza os programas nos meus computadores que rodam o Debian.
-# É preciso ser root para rodar este script.
-apt-get update
-apt-get upgrade -y
-apt-get autoremove -y
-apt-get clean
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get autoremove -y
+sudo apt-get clean
+cd ~/.fonts/nerd-fonts
+git pull
+cd ~/.fzf
+git pull
+cd ~/trash-cli
+git pull
