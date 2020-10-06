@@ -37,6 +37,7 @@ call plug#begin('$HOME/.vim/bundle/')
 " Plug 'jvirtanen/vim-octave'
 " Plug 'lervag/vimtex'
 Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
@@ -46,15 +47,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'szymonmaszke/vimpyter'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
 call plug#end()
 
+" Define o esquema de cores:
 colorscheme molokai_dark
 
 " Ativa o deoplete:
@@ -97,7 +92,7 @@ set wildmode=longest:full,full
 
 " Configuração de indentação:
 set expandtab
-set noautoindent
+set autoindent
 set shiftwidth=4
 set softtabstop=4
 
