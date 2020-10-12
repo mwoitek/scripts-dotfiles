@@ -30,14 +30,24 @@
 ZSH_THEME=""
 
 # Carrega os plugins:
-plugins=(autojump extract timer vi-mode zsh-autosuggestions)
+plugins=(
+    autojump
+    colored-man-pages
+    debian
+    extract
+    git
+    timer
+    vi-mode
+    you-should-use
+    zsh-autosuggestions
+    zsh-interactive-cd
+)
 
 source "${ZSH}/oh-my-zsh.sh" 2> /dev/null
 
 # Carrega o plugin zsh-syntax-highlighting:
-if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null
-fi
+ZSH_SYNTAX_HIGHLIGHTING="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -f ${ZSH_SYNTAX_HIGHLIGHTING} ]] && source ${ZSH_SYNTAX_HIGHLIGHTING} 2> /dev/null
 
 # Configuração do plugin timer:
 export TIMER_FORMAT="[%d]"
@@ -45,6 +55,24 @@ export TIMER_PRECISION=2
 
 # Variável para evitar um comportamento estranho no vi-mode:
 export KEYTIMEOUT=1
+
+# Comandos para adicionar atalhos como ci", ci', ci` e di":
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $m $c select-quoted
+    done
+done
+
+# Comandos para adicionar atalhos como ci{, ci(, ci< e di{:
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+    for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+        bindkey -M $m $c select-bracketed
+    done
+done
 
 # Habilita cores:
 autoload -U colors && colors
@@ -54,7 +82,7 @@ export CONDA_ACTIVE=""
 NOVALINHA=$'\n'
 function zle-line-init zle-keymap-select {
     MODO="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
-    PROMPT="[%B%n%b@%B%m%b] [%B%D %T%b] [%B${MODO}%b]${NOVALINHA}[%B%~%b]${NOVALINHA}[%B%h%b]${CONDA_ACTIVE}> "
+    PROMPT="┌[%B%n%b@%B%m%b]${CONDA_ACTIVE} [%B${MODO}%b]${NOVALINHA}└[%B%~%b]${NOVALINHA}▶ "
     zle reset-prompt
 }
 zle -N zle-line-init
@@ -66,6 +94,12 @@ zstyle ":completion:*" menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
+
+# Atalhos do vim para navegar no menu do completamento automático:
+bindkey -M menuselect "h" vi-backward-char
+bindkey -M menuselect "j" vi-down-line-or-history
+bindkey -M menuselect "k" vi-up-line-or-history
+bindkey -M menuselect "l" vi-forward-char
 
 # Comando para usar os recursos do conda:
 [[ -f "${HOME}/.conda.zsh" ]] && source "${HOME}/.conda.zsh" 2> /dev/null
