@@ -107,10 +107,7 @@ bindkey -M menuselect "l" vi-forward-char
 # Comando para usar os recursos do fzf:
 [[ -f "${HOME}/.fzf.zsh" ]] && source "${HOME}/.fzf.zsh" 2> /dev/null
 
-# Aliases que defini para o bash:
-[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases" 2> /dev/null
-
 # Aliases que defini para o zsh:
-[[ -f "${HOME}/.zsh_aliases" ]] && source "${HOME}/.zsh_aliases" 2> /dev/null
+[[ -f "${HOME}/.zsh_aliases.zsh" ]] && source "${HOME}/.zsh_aliases.zsh" 2> /dev/null
 
 ac-py
