@@ -166,6 +166,7 @@ nnoremap <leader>p :setlocal spell! spelllang=pt_br<CR>
 nnoremap ga H
 nnoremap gb L
 nnoremap gl $
+vnoremap gl $<Left>
 
 " ATALHOS PARA PASSAR DE UMA SPLIT PARA OUTRA.
 
