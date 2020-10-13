@@ -1,6 +1,6 @@
 scripts-dotfiles
 ================
 
-This repository contains my configuration files.
+This repo contains my scripts and configuration files.
 
-Este repositório contém os meus arquivos de configuração.
+Este repositório contém os meus scripts e arquivos de configuração.
