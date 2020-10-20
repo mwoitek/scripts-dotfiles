@@ -27,14 +27,29 @@ else
 fi
 echo -e "\\n${VERDE}Arquivos baixados.${RESET}\\n"
 
+echo -e "${AZUL}Movendo os meus arquivos de configuração do zsh...${RESET}\\n"
+# shellcheck disable=SC2164
+cd
+if [[ -d ./scripts-dotfiles/dotfiles/zsh ]]; then
+    for FILE in ./scripts-dotfiles/dotfiles/zsh/.*; do
+        if [[ -f "./${FILE##*/}" ]]; then
+            mv "./${FILE##*/}" "./${FILE##*/}-backup"
+        fi
+        cp "${FILE}" .
+    done
+    echo -e "\\n${VERDE}Os meus arquivos de configuração do zsh estão nos seus devidos lugares.${RESET}\\n"
+else
+    echo -e "${VERMELHO}A pasta com os meus arquivos de configuração do zsh não foi encontrada.${RESET}\\n"
+fi
+
 echo -e "${AZUL}Movendo os meus scripts de atualização...${RESET}\\n"
 # shellcheck disable=SC2164
 cd
-if [[ -d ./scripts-dotfiles/atual ]]; then
+if [[ -d ./scripts-dotfiles/scripts/atual ]]; then
     if [[ -d ./atual ]]; then
         mv ./atual ./atual-backup
     fi
-    cp -r ./scripts-dotfiles/atual .
+    cp -r ./scripts-dotfiles/scripts/atual .
     echo -e "\\n${VERDE}Os meus scripts de atualização estão nos seus devidos lugares.${RESET}\\n"
 else
     echo -e "${VERMELHO}A pasta com os meus scripts de atualização não foi encontrada.${RESET}\\n"
