@@ -33,6 +33,10 @@ yes | pip install tensorflow
 # yes | pip install pyspark
 # conda install seaborn --yes
 # conda install unidecode --yes
+yes | pip install python-language-server
+yes | pip install pyls-black
+yes | pip install pyls-isort
+yes | pip install pyls-mypy
 conda deactivate
 
 echo -e "\\n${VERDE}Ambiente do Python criado.${RESET}"
