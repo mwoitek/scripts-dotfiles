@@ -34,11 +34,11 @@ let g:python3_host_prog='/home/woitek/miniconda3/envs/env1/bin/python3'
 
 " Usa o vim-plug para carregar os plugins:
 call plug#begin('$HOME/.vim/bundle/')
+" Plug 'easymotion/vim-easymotion'
 " Plug 'jvirtanen/vim-octave'
 " Plug 'lervag/vimtex'
 " Plug 'sheerun/vim-polyglot'
 Plug 'Raimondi/delimitMate'
-Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'frazrepo/vim-rainbow'
 Plug 'itchyny/lightline.vim'
@@ -46,6 +46,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
+Plug 'svermeulen/vim-subversive'
 Plug 'szymonmaszke/vimpyter'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
@@ -107,8 +108,8 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Configuração de indentação:
-set expandtab
 set autoindent
+set expandtab
 set shiftwidth=4
 set softtabstop=4
 
@@ -128,6 +129,9 @@ autocmd BufWritePre * %s/\n\+\%$//e
 autocmd InsertEnter * norm zz
 
 " ATALHOS DE TECLADO.
+
+" Usa 's' para definir um verbo do vim para fazer substituições:
+nmap s <plug>(SubversiveSubstitute)
 
 " Usa a vírgula como a tecla líder:
 let mapleader=','
