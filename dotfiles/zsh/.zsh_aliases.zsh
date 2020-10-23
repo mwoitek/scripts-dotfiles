@@ -1,7 +1,7 @@
 # ALIASES.
 
 # Roda o meu script do Bash para atualizar programas no Debian:
-alias atual="${HOME}/atual.sh"
+alias atual="${HOME}/atual/atual.sh"
 
 # Comando cp personalizado:
 alias cp="cp --interactive --verbose"

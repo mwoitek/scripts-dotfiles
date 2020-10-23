@@ -24,6 +24,9 @@
 #
 # Meu arquivo de configuração do zsh.
 
+# Se não estiver rodando interativamente, não faça nada:
+[[ $- != *i* ]] && return
+
 # CONFIGURAÇÃO RELACIONADA COM O OH-MY-ZSH.
 
 # Desabilita os temas:
@@ -81,8 +84,8 @@ autoload -U colors && colors
 export CONDA_ACTIVE=""
 NOVALINHA=$'\n'
 function zle-line-init zle-keymap-select {
-    MODO="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
-    PROMPT="┌[%B%n%b@%B%m%b]${CONDA_ACTIVE} [%B${MODO}%b]${NOVALINHA}└[%B%~%b]${NOVALINHA}▶ "
+    MODO="${${KEYMAP/vicmd/N}/(main|viins)/I}"
+    PROMPT="╔[%B%n%b@%B%m%b]${CONDA_ACTIVE}${NOVALINHA}╠[%B%~%b]${NOVALINHA}╚[%B${MODO}%b]▶ "
     zle reset-prompt
 }
 zle -N zle-line-init
