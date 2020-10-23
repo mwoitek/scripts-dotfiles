@@ -37,7 +37,6 @@ call plug#begin('$HOME/.vim/bundle/')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'jvirtanen/vim-octave'
 " Plug 'lervag/vimtex'
-" Plug 'sheerun/vim-polyglot'
 Plug 'Raimondi/delimitMate'
 Plug 'flazz/vim-colorschemes'
 Plug 'frazrepo/vim-rainbow'
@@ -46,6 +45,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
+Plug 'sheerun/vim-polyglot'
 Plug 'svermeulen/vim-subversive'
 Plug 'szymonmaszke/vimpyter'
 Plug 'tommcdo/vim-exchange'
@@ -57,25 +57,27 @@ call plug#end()
 " Define o esquema de cores:
 colorscheme molokai
 
-" Configuração do CoC:
-
-" Especifica a localização do binário do clangd:
-if filereadable('/usr/bin/clangd-11')
-    call coc#config('clangd.path', '/usr/bin/clangd-11')
-endif
-
-" Especifica a localização do binário do phpactor:
-if filereadable('$HOME/.vim/bundle/phpactor/bin/phpactor')
-    call coc#config('phpactor.path', '$HOME/.vim/bundle/phpactor/bin/phpactor')
-endif
+" Ativa o vim-rainbow:
+let g:rainbow_active=1
 
 " Configuração do lightline:
 set laststatus=2
 set noshowmode
-let g:lightline={'colorscheme': 'seoul256'}
+let g:lightline={'colorscheme': 'molokai'}
 
-" Ativa o vim-rainbow:
-let g:rainbow_active=1
+" Configuração do CoC:
+" Especifica a localização do binário do clangd:
+if filereadable('/usr/bin/clangd-11')
+    call coc#config('clangd.path', '/usr/bin/clangd-11')
+endif
+" Especifica a localização do binário do npm:
+if filereadable('/usr/bin/npm')
+    call coc#config('tsserver.npm', '/usr/bin/npm')
+endif
+" Especifica a localização do binário do phpactor:
+if filereadable('/home/woitek/.vim/bundle/phpactor/bin/phpactor')
+    call coc#config('phpactor.path', '/home/woitek/.vim/bundle/phpactor/bin/phpactor')
+endif
 
 " Configuração do vimtex:
 " let g:tex_flavor='latex'
@@ -115,7 +117,7 @@ set softtabstop=4
 
 " Destaca a linha atual:
 set cursorline
-highlight CursorLine cterm=bold
+" highlight CursorLine cterm=bold
 
 " Dá acesso à área de transferência:
 set clipboard+=unnamedplus
@@ -131,7 +133,7 @@ autocmd InsertEnter * norm zz
 " ATALHOS DE TECLADO.
 
 " Usa 's' para definir um verbo do vim para fazer substituições:
-nmap s <plug>(SubversiveSubstitute)
+nmap s <Plug>(SubversiveSubstitute)
 
 " Usa a vírgula como a tecla líder:
 let mapleader=','
@@ -178,3 +180,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" ATALHOS PARA USAR O PRETTIER.
+
+vmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
