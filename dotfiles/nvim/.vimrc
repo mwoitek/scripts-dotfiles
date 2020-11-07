@@ -29,22 +29,21 @@ set encoding=utf-8
 set termguicolors
 
 " Especifica a localização do binário do Python:
-" let g:python3_host_prog='/home/woitek/.conda/envs/env1/bin/python3'
 let g:python3_host_prog='/home/woitek/miniconda3/envs/env1/bin/python3'
 
 " Usa o vim-plug para carregar os plugins:
 call plug#begin('$HOME/.vim/bundle/')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'jvirtanen/vim-octave'
-" Plug 'lervag/vimtex'
+" Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'Raimondi/delimitMate'
 Plug 'flazz/vim-colorschemes'
 Plug 'frazrepo/vim-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'lervag/vimtex'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'sheerun/vim-polyglot'
 Plug 'svermeulen/vim-subversive'
 Plug 'szymonmaszke/vimpyter'
@@ -75,23 +74,22 @@ if filereadable('/usr/bin/npm')
     call coc#config('tsserver.npm', '/usr/bin/npm')
 endif
 " Especifica a localização do binário do phpactor:
-if filereadable('/home/woitek/.vim/bundle/phpactor/bin/phpactor')
-    call coc#config('phpactor.path', '/home/woitek/.vim/bundle/phpactor/bin/phpactor')
-endif
+" if filereadable('/home/woitek/.vim/bundle/phpactor/bin/phpactor')
+"     call coc#config('phpactor.path', '/home/woitek/.vim/bundle/phpactor/bin/phpactor')
+" endif
 
 " Configuração do vimtex:
-" let g:tex_flavor='latex'
-" let g:vimtex_compiler_progname='/home/woitek/.conda/envs/env1/bin/nvr'
-" let g:vimtex_indent_enabled=0
-" let g:vimtex_indent_ignored_envs=['align', 'align*', 'block', 'document',
-"                                 \ 'equation', 'equation*', 'figure', 'frame', 'itemize']
-" let g:vimtex_indent_on_ampersands=0
-" let g:vimtex_quickfix_autoclose_after_keystrokes=1
-" let g:vimtex_view_method='zathura'
+let g:tex_flavor='latex'
+let g:vimtex_compiler_progname='/home/woitek/miniconda3/envs/env1/bin/nvr'
+let g:vimtex_indent_enabled=0
+let g:vimtex_indent_ignored_envs=['align', 'align*', 'block', 'document',
+                                \ 'equation', 'equation*', 'figure', 'frame', 'itemize']
+let g:vimtex_indent_on_ampersands=0
+let g:vimtex_quickfix_autoclose_after_keystrokes=1
+let g:vimtex_view_method='zathura'
 
 " Habilita o destaque de sintaxe:
 syntax on
-filetype indent plugin on
 autocmd BufNewFile,BufRead *.m set syntax=octave
 
 " Mostra o número da linha atual e a posição relativa das outras linhas:
@@ -110,10 +108,12 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Configuração de indentação:
+filetype indent plugin on
 set autoindent
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+autocmd FileType xml setlocal shiftwidth=2 softtabstop=2
 
 " Destaca a linha atual:
 set cursorline
@@ -140,6 +140,11 @@ let mapleader=','
 
 " <leader>+h --- Desabilita temporariamente o destaque do texto buscado:
 nnoremap <leader>h :noh<CR>
+
+" <leader>+o --- Desativa e depois ativa o destaque de sintaxe.
+" Isso é útil, pois tem situações em que o destaque de sintaxe não é ativado
+" corretamente de maneira automática. O atalho abaixo resolve esse problema.
+nnoremap <leader>o :syntax off<CR>:syntax on<CR>
 
 " <leader>+t --- Remove espaços desnecessários nos finais das linhas:
 nnoremap <leader>t :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -172,6 +177,8 @@ nnoremap <leader>p :setlocal spell! spelllang=pt_br<CR>
 nnoremap ga H
 nnoremap gb L
 nnoremap gl $
+vnoremap ga H
+vnoremap gb L
 vnoremap gl $<Left>
 
 " ATALHOS PARA PASSAR DE UMA SPLIT PARA OUTRA.
