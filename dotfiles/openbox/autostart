@@ -1,0 +1,3 @@
+~/.config/keyboard_config/keyboard_config.sh &
+picom &
+nitrogen --restore &

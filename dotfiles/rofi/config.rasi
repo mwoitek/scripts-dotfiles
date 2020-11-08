@@ -1,0 +1,10 @@
+configuration {
+	combi-modi: "window,run,drun";
+	font: "JetBrainsMono Nerd Font Mono 14";
+	lines: 20;
+	matching: "fuzzy";
+	modi: "combi,drun,run,window";
+	terminal: "alacritty";
+	theme: "/usr/share/rofi/themes/Monokai.rasi";
+	width: 90;
+}
