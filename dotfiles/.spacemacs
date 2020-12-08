@@ -41,6 +41,7 @@ This function should only modify configuration layer settings."
             c-c++-lsp-enable-semantic-highlight 'rainbow)
      dap
      emacs-lisp
+     ess
      git
      html
      import-js
@@ -52,6 +53,7 @@ This function should only modify configuration layer settings."
                  js2-basic-offset 4
                  js2-mode-show-strict-warnings nil)
      lsp
+     lua
      markdown
      (php :variables php-backend 'lsp)
      (python :variables python-backend 'lsp)
@@ -77,7 +79,8 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(molokai-theme
+   dotspacemacs-additional-packages '(jbeans-theme
+                                      molokai-theme
                                       monokai-theme
                                       vterm)
 
@@ -218,7 +221,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(jbeans
+                         spacemacs-dark
                          monokai
                          molokai)
 
@@ -347,7 +351,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -526,8 +530,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq magit-repository-directories '(("~/MEGA/MEGAsync/repos/" . 1)))
-  (setq-default c-basic-offset 4)
+  (setq magit-repository-directories '(("~/repos/" . 1)))
+  ;; (setq-default c-basic-offset 4)
+  ;; (setq-default inferior-R-program-name "~/miniconda3/envs/env3/bin/R")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
