@@ -9,7 +9,7 @@ window:
     columns: 110
     lines: 35
   dynamic_title: false
-  startup_mode: Maximized
+  # startup_mode: Maximized
 
 scrolling:
   history: 10000
@@ -19,57 +19,45 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: CodeNewRoman Nerd Font Mono
-    style: Book
+    family: JetBrainsMono Nerd Font Mono
+    style: Regular
   bold:
-    family: CodeNewRoman Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Bold
   italic:
-    family: CodeNewRoman Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
-  size: 16.0
+  size: 12.0
   offset:
     x: 0
-    y: 3
+    y: 0
   scale_with_dpi: true
 
 colors:
   primary:
-    background: '0x1d2021'
-    foreground: '0xebdbb2'
-  normal:
-    black: '0x282828'
-    red: '0xcc241d'
-    green: '0x98971a'
-    yellow: '0xd79921'
-    blue: '0x458588'
-    magenta: '0xb16286'
-    cyan: '0x689d6a'
-    white: '0xa89984'
-  bright:
-    black: '0x928374'
-    red: '0xfb4934'
-    green: '0xb8bb26'
-    yellow: '0xfabd2f'
-    blue: '0x83a598'
-    magenta: '0xd3869b'
-    cyan: '0x8ec07c'
-    white: '0xebdbb2'
+    background: '#191919'
+    foreground: '#e5e5e5'
   cursor:
-    cursor: CellForeground
-    text: CellBackground
-  vi_mode_cursor:
-    cursor: CellForeground
-    text: CellBackground
+    text:       '#e5e5e5'
+    cursor:     '#333333'
   selection:
-    background: CellForeground
-    text: CellBackground
+    text:       '#ffffff'
+    background: '#404040'
+  normal:
+    black:      '#191919'
+    red:        '#cc0000'
+    green:      '#009a00'
+    yellow:     '#ffff4c'
+    blue:       '#3232ff'
+    magenta:    '#cc00cc'
+    cyan:       '#00b2b2'
+    white:      '#e5e5e5'
 
 bell:
   animation: EaseOutExpo
   duration: 0
 
-background_opacity: 0.9
+background_opacity: 1.0
 
 mouse:
   double_click: { threshold: 300 }
@@ -83,9 +71,7 @@ hide_cursor_when_typing: true
 
 cursor:
   style: Block
-  unfocused_hollow: true
-
-unfocused_hollow_cursor: false
+  unfocused_hollow: false
 
 live_config_reload: true
 
