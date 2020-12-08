@@ -6,8 +6,6 @@ function addToPath() {
 }
 
 addToPath "${HOME}/.local/bin"
-# Diretório dos programas instalados como pacotes snap:
-addToPath "/snap/bin"
 addToPath "/usr/sbin"
 
 # Diretório de instalação do oh-my-zsh:
