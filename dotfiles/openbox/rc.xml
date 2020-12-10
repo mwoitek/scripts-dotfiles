@@ -19,9 +19,9 @@
     <primaryMonitor>Mouse</primaryMonitor>
   </placement>
   <theme>
-    <name>Carbon</name>
+    <name>Nightmare-01</name>
     <titleLayout>NL</titleLayout>
-    <keepBorder>yes</keepBorder>
+    <keepBorder>no</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Arimo Nerd Font</name>
@@ -37,26 +37,26 @@
     </font>
     <font place="MenuHeader">
       <name>Arimo Nerd Font</name>
-      <size>11</size>
+      <size>12</size>
       <weight>normal</weight>
       <slant>normal</slant>
     </font>
     <font place="MenuItem">
-      <name>Arimo Nerd Font</name>
-      <size>11</size>
+      <name>JetBrainsMono Nerd Font Mono</name>
+      <size>12</size>
       <weight>normal</weight>
       <slant>normal</slant>
     </font>
     <font place="ActiveOnScreenDisplay">
-      <name>Arimo Nerd Font</name>
-      <size>13</size>
+      <name>JetBrainsMono Nerd Font Mono</name>
+      <size>12</size>
       <weight>bold</weight>
       <slant>normal</slant>
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>Arimo Nerd Font</name>
-      <size>13</size>
-      <weight>bold</weight>
+      <name>JetBrainsMono Nerd Font Mono</name>
+      <size>12</size>
+      <weight>normal</weight>
       <slant>normal</slant>
     </font>
   </theme>
@@ -86,27 +86,9 @@
     <left>0</left>
     <right>0</right>
   </margins>
-  <dock>
-    <position>TopLeft</position>
-    <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
-    <floatingX>0</floatingX>
-    <floatingY>0</floatingY>
-    <noStrut>no</noStrut>
-    <stacking>Above</stacking>
-    <!-- 'Above', 'Normal', or 'Below' -->
-    <direction>Vertical</direction>
-    <!-- 'Vertical' or 'Horizontal' -->
-    <autoHide>no</autoHide>
-    <hideDelay>300</hideDelay>
-    <!-- in milliseconds (1000 = 1 second) -->
-    <showDelay>300</showDelay>
-    <!-- in milliseconds (1000 = 1 second) -->
-    <moveButton>Middle</moveButton>
-    <!-- 'Left', 'Middle', 'Right' -->
-  </dock>
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
-    <!-- Keybindings for desktop switching -->
+    <!-- Desktop switching -->
     <keybind key="W-p">
       <action name="GoToDesktop">
         <to>left</to>
@@ -117,18 +99,6 @@
       <action name="GoToDesktop">
         <to>right</to>
         <wrap>yes</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-W-p">
-      <action name="SendToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-W-n">
-      <action name="SendToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-KP_1">
@@ -151,83 +121,55 @@
         <to>4</to>
       </action>
     </keybind>
+    <!-- Windows -->
+    <keybind key="A-space">
+      <action name="ShowMenu">
+        <menu>client-menu</menu>
+      </action>
+    </keybind>
+    <keybind key="A-Tab">
+      <action name="NextWindow">
+        <allDesktops>yes</allDesktops>
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+          <action name="Unshade"/>
+        </finalactions>
+      </action>
+    </keybind>
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
-    <!-- Keybindings for windows -->
     <keybind key="W-k">
       <action name="Close"/>
     </keybind>
     <keybind key="W-Return">
       <action name="ToggleMaximizeFull"/>
     </keybind>
-    <keybind key="A-space">
-      <action name="ShowMenu">
-        <menu>client-menu</menu>
-      </action>
-    </keybind>
-    <!-- Keybindings for window switching -->
-    <keybind key="A-Tab">
-      <action name="NextWindow">
-        <finalactions>
-          <action name="Focus"/>
-          <action name="Raise"/>
-          <action name="Unshade"/>
-        </finalactions>
-      </action>
-    </keybind>
-    <keybind key="C-A-Tab">
-      <action name="NextWindow">
-        <panels>yes</panels>
-        <desktop>yes</desktop>
-        <finalactions>
-          <action name="Focus"/>
-          <action name="Raise"/>
-          <action name="Unshade"/>
-        </finalactions>
-      </action>
-    </keybind>
-    <!-- Keybindings for window switching with the arrow keys -->
-    <keybind key="W-s">
-      <keybind key="Right">
-        <action name="DirectionalCycleWindows">
-          <direction>right</direction>
-        </action>
-      </keybind>
-      <keybind key="Left">
-        <action name="DirectionalCycleWindows">
-          <direction>left</direction>
-        </action>
-      </keybind>
-      <keybind key="Up">
-        <action name="DirectionalCycleWindows">
-          <direction>up</direction>
-        </action>
-      </keybind>
-      <keybind key="Down">
-        <action name="DirectionalCycleWindows">
-          <direction>down</direction>
-        </action>
-      </keybind>
-    </keybind>
-    <!-- Keybindings for running applications -->
+    <!-- Browsers -->
     <keybind key="W-b">
       <keybind key="b">
         <action name="Execute">
           <command>brave</command>
         </action>
       </keybind>
+      <keybind key="c">
+        <action name="Execute">
+          <command>chromium</command>
+        </action>
+      </keybind>
       <keybind key="f">
         <action name="Execute">
-          <command>firefox</command>
+          <command>~/firefox/firefox</command>
         </action>
       </keybind>
       <keybind key="i">
         <action name="Execute">
-          <command>/home/woitek/icecat/icecat</command>
+          <command>~/icecat/icecat</command>
         </action>
       </keybind>
     </keybind>
+    <!-- Menus -->
     <keybind key="W-m">
       <keybind key="c">
         <action name="Execute">
@@ -239,9 +181,19 @@
           <command>rofi -show drun</command>
         </action>
       </keybind>
+      <keybind key="o">
+        <action name="ShowMenu">
+          <menu>root-menu</menu>
+        </action>
+      </keybind>
       <keybind key="r">
         <action name="Execute">
           <command>rofi -show run</command>
+        </action>
+      </keybind>
+      <keybind key="s">
+        <action name="ShowMenu">
+          <menu>client-send-to-menu</menu>
         </action>
       </keybind>
       <keybind key="w">
@@ -250,10 +202,27 @@
         </action>
       </keybind>
     </keybind>
+    <!-- Openbox -->
+    <keybind key="W-o">
+      <keybind key="e">
+        <action name="Exit">
+          <prompt>yes</prompt>
+        </action>
+      </keybind>
+      <keybind key="r">
+        <action name="Reconfigure"/>
+      </keybind>
+    </keybind>
+    <!-- Terminal emulators -->
     <keybind key="W-t">
       <keybind key="a">
         <action name="Execute">
           <command>alacritty</command>
+        </action>
+      </keybind>
+      <keybind key="t">
+        <action name="Execute">
+          <command>terminator</command>
         </action>
       </keybind>
       <keybind key="x">
@@ -590,7 +559,6 @@
     </context>
   </mouse>
   <menu>
-    <!-- default menu file (or custom one in $HOME/.config/openbox/) -->
     <file>menu.xml</file>
     <hideDelay>200</hideDelay>
     <middle>yes</middle>
@@ -603,6 +571,9 @@
     <application class="*">
       <decor>no</decor>
     </application>
+    <application class="Alacritty">
+      <maximized>true</maximized>
+    </application>
     <application class="Brave-browser">
       <size>
         <height>98%</height>
@@ -613,7 +584,17 @@
         <y>center</y>
       </position>
     </application>
-    <application class="firefox">
+    <application class="Chromium">
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+    </application>
+    <application class="*irefox*">
       <size>
         <height>98%</height>
         <width>98%</width>
@@ -632,6 +613,22 @@
         <x>center</x>
         <y>center</y>
       </position>
+    </application>
+    <application class="Nitrogen">
+      <maximized>true</maximized>
+    </application>
+    <application class="Pavucontrol">
+      <size>
+        <height>80%</height>
+        <width>80%</width>
+      </size>
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+    </application>
+    <application class="Terminator">
+      <maximized>true</maximized>
     </application>
     <application name="xfce4-terminal">
       <maximized>true</maximized>
