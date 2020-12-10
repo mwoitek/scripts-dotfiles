@@ -114,3 +114,20 @@ ZSH_SYNTAX_HIGHLIGHTING="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-synt
 
 # Ativa o ambiente do Python (conda):
 ac-py
+
+# Comandos para usar os recursos do zsh-histdb:
+ZSH_HISTDB="${HOME}/.oh-my-zsh/custom/plugins/zsh-histdb/sqlite-history.zsh"
+[[ -f "${ZSH_HISTDB}" ]] && source "${ZSH_HISTDB}" 2> /dev/null
+autoload -Uz add-zsh-hook
+
+# Comandos para integrar o zsh-histdb e o zsh-autosuggestions:
+_zsh_autosuggest_strategy_histdb_top_here() {
+    local query="select commands.argv from
+history left join commands on history.command_id = commands.rowid
+left join places on history.place_id = places.rowid
+where places.dir LIKE '$(sql_escape $PWD)%'
+and commands.argv LIKE '$(sql_escape $1)%'
+group by commands.argv order by count(*) desc limit 1"
+    suggestion=$(_histdb_query "$query")
+}
+ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
