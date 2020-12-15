@@ -21,7 +21,7 @@
   <theme>
     <name>Nightmare-01</name>
     <titleLayout>NL</titleLayout>
-    <keepBorder>no</keepBorder>
+    <keepBorder>yes</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Arimo Nerd Font</name>
@@ -61,13 +61,18 @@
     </font>
   </theme>
   <desktops>
-    <number>4</number>
+    <number>9</number>
     <firstdesk>1</firstdesk>
     <names>
-      <name>Workspace 1</name>
-      <name>Workspace 2</name>
-      <name>Workspace 3</name>
-      <name>Workspace 4</name>
+      <name>1</name>
+      <name>2</name>
+      <name>3</name>
+      <name>4</name>
+      <name>5</name>
+      <name>6</name>
+      <name>7</name>
+      <name>8</name>
+      <name>9</name>
     </names>
     <popupTime>600</popupTime>
   </desktops>
@@ -89,36 +94,61 @@
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
     <!-- Desktop switching -->
-    <keybind key="W-p">
+    <keybind key="W-bracketleft">
       <action name="GoToDesktop">
         <to>left</to>
         <wrap>yes</wrap>
       </action>
     </keybind>
-    <keybind key="W-n">
+    <keybind key="W-bracketright">
       <action name="GoToDesktop">
         <to>right</to>
         <wrap>yes</wrap>
       </action>
     </keybind>
-    <keybind key="W-KP_1">
+    <keybind key="W-1">
       <action name="GoToDesktop">
         <to>1</to>
       </action>
     </keybind>
-    <keybind key="W-KP_2">
+    <keybind key="W-2">
       <action name="GoToDesktop">
         <to>2</to>
       </action>
     </keybind>
-    <keybind key="W-KP_3">
+    <keybind key="W-3">
       <action name="GoToDesktop">
         <to>3</to>
       </action>
     </keybind>
-    <keybind key="W-KP_4">
+    <keybind key="W-4">
       <action name="GoToDesktop">
         <to>4</to>
+      </action>
+    </keybind>
+    <keybind key="W-5">
+      <action name="GoToDesktop">
+        <to>5</to>
+      </action>
+    </keybind>
+    <keybind key="W-6">
+      <action name="GoToDesktop">
+        <to>6</to>
+      </action>
+    </keybind>
+    <keybind key="W-7">
+      <action name="GoToDesktop">
+        <to>7</to>
+      </action>
+    </keybind>
+    <keybind key="W-8">
+      <action name="GoToDesktop">
+        <to>8</to>
+      </action>
+    </keybind>
+    <keybind key="W-9">
+      <action name="GoToDesktop">
+        <to>9</to>
       </action>
     </keybind>
     <!-- Windows -->
@@ -137,17 +167,59 @@
         </finalactions>
       </action>
     </keybind>
-    <keybind key="W-d">
-      <action name="ToggleShowDesktop"/>
-    </keybind>
-    <keybind key="W-k">
+    <keybind key="W-S-c">
       <action name="Close"/>
     </keybind>
     <keybind key="W-Return">
       <action name="ToggleMaximizeFull"/>
     </keybind>
+    <keybind key="W-S-1">
+      <action name="SendToDesktop">
+        <to>1</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-2">
+      <action name="SendToDesktop">
+        <to>2</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-3">
+      <action name="SendToDesktop">
+        <to>3</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-4">
+      <action name="SendToDesktop">
+        <to>4</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-5">
+      <action name="SendToDesktop">
+        <to>5</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-6">
+      <action name="SendToDesktop">
+        <to>6</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-7">
+      <action name="SendToDesktop">
+        <to>7</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-8">
+      <action name="SendToDesktop">
+        <to>8</to>
+      </action>
+    </keybind>
+    <keybind key="W-S-9">
+      <action name="SendToDesktop">
+        <to>9</to>
+      </action>
+    </keybind>
     <!-- Browsers -->
-    <keybind key="W-b">
+    <keybind key="W-n">
       <keybind key="b">
         <action name="Execute">
           <command>brave</command>
@@ -191,11 +263,6 @@
           <command>rofi -show run</command>
         </action>
       </keybind>
-      <keybind key="s">
-        <action name="ShowMenu">
-          <menu>client-send-to-menu</menu>
-        </action>
-      </keybind>
       <keybind key="w">
         <action name="Execute">
           <command>rofi -show window</command>
@@ -214,7 +281,7 @@
       </keybind>
     </keybind>
     <!-- Terminal emulators -->
-    <keybind key="W-t">
+    <keybind key="W-e">
       <keybind key="a">
         <action name="Execute">
           <command>alacritty</command>
@@ -572,66 +639,94 @@
       <decor>no</decor>
     </application>
     <application class="Alacritty">
-      <maximized>true</maximized>
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
     </application>
     <application class="Brave-browser">
-      <size>
-        <height>98%</height>
-        <width>98%</width>
-      </size>
+      <desktop>2</desktop>
       <position force="yes">
         <x>center</x>
         <y>center</y>
       </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
     </application>
     <application class="Chromium">
-      <size>
-        <height>98%</height>
-        <width>98%</width>
-      </size>
+      <desktop>2</desktop>
       <position force="yes">
         <x>center</x>
         <y>center</y>
       </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
+    </application>
+    <application class="Emacs">
+      <desktop>9</desktop>
     </application>
     <application class="*irefox*">
-      <size>
-        <height>98%</height>
-        <width>98%</width>
-      </size>
+      <desktop>2</desktop>
       <position force="yes">
         <x>center</x>
         <y>center</y>
       </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
     </application>
     <application class="IceCat">
-      <size>
-        <height>98%</height>
-        <width>98%</width>
-      </size>
+      <desktop>2</desktop>
       <position force="yes">
         <x>center</x>
         <y>center</y>
       </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
     </application>
     <application class="Nitrogen">
       <maximized>true</maximized>
     </application>
     <application class="Pavucontrol">
-      <size>
-        <height>80%</height>
-        <width>80%</width>
-      </size>
       <position force="yes">
         <x>center</x>
         <y>center</y>
       </position>
+      <size>
+        <height>80%</height>
+        <width>80%</width>
+      </size>
     </application>
     <application class="Terminator">
-      <maximized>true</maximized>
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
     </application>
     <application name="xfce4-terminal">
-      <maximized>true</maximized>
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+      <size>
+        <height>98%</height>
+        <width>98%</width>
+      </size>
     </application>
     <application class="Zathura">
       <maximized>true</maximized>
