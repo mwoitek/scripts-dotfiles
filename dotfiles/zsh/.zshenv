@@ -15,6 +15,9 @@ export ZSH="${HOME}/.oh-my-zsh"
 export VISUAL="nvim"
 export EDITOR="${VISUAL}"
 
+# Define o navegador padrão:
+export BROWSER="chromium"
+
 # Configuração do comando history:
 export HISTSIZE=20000
 export SAVEHIST="${HISTSIZE}"
