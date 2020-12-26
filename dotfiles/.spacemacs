@@ -41,7 +41,7 @@ This function should only modify configuration layer settings."
             c-c++-lsp-enable-semantic-highlight 'rainbow)
      dap
      emacs-lisp
-     ess
+     (ess :variables ess-r-backend 'lsp)
      git
      html
      import-js
@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
                  javascript-import-tool 'import-js
                  js2-basic-offset 4
                  js2-mode-show-strict-warnings nil)
-     lsp
+     (lsp :variables lsp-ui-doc-enable nil)
      lua
      markdown
      (php :variables php-backend 'lsp)
@@ -82,6 +82,9 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(jbeans-theme
                                       molokai-theme
                                       monokai-theme
+                                      poly-R
+                                      poly-markdown
+                                      polymode
                                       vterm)
 
    ;; A list of packages that cannot be updated.
@@ -223,8 +226,8 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(jbeans
                          spacemacs-dark
-                         monokai
-                         molokai)
+                         molokai
+                         monokai)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -237,7 +240,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
-   dotspacemacs-colorize-cursor-according-to-state nil
+   dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("JetBrainsMono Nerd Font Mono"
@@ -530,6 +533,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+  (global-git-commit-mode t)
   (setq magit-repository-directories '(("~/repos/" . 1)))
   ;; (setq-default c-basic-offset 4)
   ;; (setq-default inferior-R-program-name "~/miniconda3/envs/env3/bin/R")
