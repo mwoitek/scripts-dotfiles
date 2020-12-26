@@ -1,14 +1,9 @@
-"
-"
-"
 " ██╗    ██╗ ██████╗ ██╗████████╗███████╗██╗  ██╗
 " ██║    ██║██╔═══██╗██║╚══██╔══╝██╔════╝██║ ██╔╝
 " ██║ █╗ ██║██║   ██║██║   ██║   █████╗  █████╔╝
 " ██║███╗██║██║   ██║██║   ██║   ██╔══╝  ██╔═██╗
 " ╚███╔███╔╝╚██████╔╝██║   ██║   ███████╗██║  ██╗
 "  ╚══╝╚══╝  ╚═════╝ ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
-"
-"
 "
 "            $$\
 "            \__|
@@ -18,10 +13,6 @@
 "   \$$$  /  $$ |$$ | $$ | $$ |$$ |      $$ |
 " $$\\$  /   $$ |$$ | $$ | $$ |$$ |      \$$$$$$$\
 " \__|\_/    \__|\__| \__| \__|\__|       \_______|
-"
-"
-"
-" Meu arquivo de configuração do vim.
 
 " Configuração básica:
 set nocompatible
@@ -35,48 +26,46 @@ let g:python3_host_prog='/home/woitek/miniconda3/envs/env1/bin/python3'
 call plug#begin('$HOME/.vim/bundle/')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'jvirtanen/vim-octave'
-" Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'Raimondi/delimitMate'
 Plug 'flazz/vim-colorschemes'
-Plug 'frazrepo/vim-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'lervag/vimtex'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if has('nvim')
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 Plug 'sheerun/vim-polyglot'
 Plug 'svermeulen/vim-subversive'
 Plug 'szymonmaszke/vimpyter'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'yggdroot/indentline'
 call plug#end()
 
 " Define o esquema de cores:
 colorscheme molokai
 
-" Ativa o vim-rainbow:
-let g:rainbow_active=1
-
 " Configuração do lightline:
 set laststatus=2
 set noshowmode
-let g:lightline={'colorscheme': 'molokai'}
+let g:lightline={'colorscheme': 'jellybeans'}
 
 " Configuração do CoC:
-" Especifica a localização do binário do clangd:
-if filereadable('/usr/bin/clangd-11')
-    call coc#config('clangd.path', '/usr/bin/clangd-11')
+if has('nvim')
+    " Especifica a localização do binário do clangd:
+    if filereadable('/usr/bin/clangd-11')
+        call coc#config('clangd.path', '/usr/bin/clangd-11')
+    endif
+    " Especifica a localização do binário do npm:
+    if filereadable('/usr/bin/npm')
+        call coc#config('tsserver.npm', '/usr/bin/npm')
+    endif
 endif
-" Especifica a localização do binário do npm:
-if filereadable('/usr/bin/npm')
-    call coc#config('tsserver.npm', '/usr/bin/npm')
-endif
-" Especifica a localização do binário do phpactor:
-" if filereadable('/home/woitek/.vim/bundle/phpactor/bin/phpactor')
-"     call coc#config('phpactor.path', '/home/woitek/.vim/bundle/phpactor/bin/phpactor')
-" endif
 
 " Configuração do vimtex:
 let g:tex_flavor='latex'
@@ -162,7 +151,7 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>z :wq<CR>
 
 " :w! --- Salva o arquivo quando a permissão de root é necessária:
-cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
+cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <Bar> edit!
 
 " ATALHOS PARA HABILITAR O CORRETOR ORTOGRÁFICO.
 
@@ -190,5 +179,7 @@ nnoremap <C-l> <C-w>l
 
 " ATALHOS PARA USAR O PRETTIER.
 
-vmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
+if has('nvim')
+    nmap <leader>f <Plug>(coc-format-selected)
+    vmap <leader>f <Plug>(coc-format-selected)
+endif
