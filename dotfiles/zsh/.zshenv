@@ -16,7 +16,7 @@ export VISUAL="nvim"
 export EDITOR="${VISUAL}"
 
 # Define o navegador padrão:
-export BROWSER="chromium"
+export BROWSER="brave"
 
 # Configuração do comando history:
 export HISTSIZE=20000

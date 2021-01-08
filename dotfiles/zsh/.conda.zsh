@@ -14,15 +14,3 @@ fi
 #     fi
 # fi
 # unset __conda_setup
-
-# Função para ativar um ambiente do conda:
-aconda () {
-    conda activate "$1"
-    export CONDA_ACTIVE=" [%BCONDA --- $2 ($1)%b]"
-}
-
-# Função para desativar um ambiente do conda:
-dconda () {
-    conda deactivate
-    export CONDA_ACTIVE=""
-}

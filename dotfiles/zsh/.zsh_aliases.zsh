@@ -12,13 +12,6 @@ alias mv="mv --interactive --verbose"
 # Comando rm personalizado:
 alias rm="rm --interactive --verbose"
 
-# CONDA.
-
-alias ac-c="aconda env2 C/C++"
-alias ac-py="aconda env1 PYTHON"
-alias ac-r="aconda env3 R"
-alias dc="dconda"
-
 # LSD.
 
 alias l="lsd -l"

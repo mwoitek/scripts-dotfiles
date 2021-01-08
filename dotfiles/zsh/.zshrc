@@ -14,8 +14,6 @@
 #       __________/\\\/______\////////\\\_\/\\\___\/\\\_\/\\\_________\//\\\________
 #        __/\\\__/\\\\\\\\\\\__/\\\\\\\\\\_\/\\\___\/\\\_\/\\\__________\///\\\\\\\\_
 #         _\///__\///////////__\//////////__\///____\///__\///_____________\////////__
-#
-# Meu arquivo de configuração do zsh.
 
 # Se não estiver rodando interativamente, não faça nada:
 [[ $- != *i* ]] && return
@@ -33,7 +31,6 @@ plugins=(
     extract
     git
     timer
-    vi-mode
     you-should-use
     zsh-autosuggestions
     zsh-interactive-cd
@@ -45,8 +42,28 @@ source "${ZSH}/oh-my-zsh.sh" 2> /dev/null
 export TIMER_FORMAT="[%d]"
 export TIMER_PRECISION=2
 
-# Variável para evitar um comportamento estranho no vi-mode:
+# Habilita o vi-mode:
+bindkey -v
 export KEYTIMEOUT=1
+
+# Use 'v' para editar a linha de comando com o $EDITOR:
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+
+# Muda o formato do cursor dependendo do modo do vi:
+function zle-keymap-select {
+    case $KEYMAP in
+        vicmd)      echo -ne "\e[1 q";;
+        main|viins) echo -ne "\e[5 q";;
+    esac
+}
+zle -N zle-keymap-select
+function zle-line-init {
+    zle -K viins
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
 
 # Comandos para adicionar atalhos como ci", ci', ci` e di":
 autoload -U select-quoted
@@ -70,16 +87,9 @@ done
 autoload -U colors && colors
 
 # Customiza o prompt:
-export CONDA_ACTIVE=""
 NOVALINHA=$'\n'
-function zle-line-init zle-keymap-select {
-    MODO="${${KEYMAP/vicmd/N}/(main|viins)/I}"
-    PROMPT="╔[%B%n%b@%B%m%b]${CONDA_ACTIVE}${NOVALINHA}╠[%B%~%b]${NOVALINHA}╚[%B${MODO}%b]▶ "
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-PS2="> "
+PROMPT="╔[%B%~%b]${NOVALINHA}╚[→] "
+PS2="→ "
 
 # Configuração do completamento automático:
 zstyle ":completion:*" menu select
@@ -113,32 +123,4 @@ ZSH_SYNTAX_HIGHLIGHTING="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-synt
 [[ -f "${ZSH_SYNTAX_HIGHLIGHTING}" ]] && source "${ZSH_SYNTAX_HIGHLIGHTING}" 2> /dev/null
 
 # Ativa o ambiente do Python (conda):
-ac-py
-
-# Comandos para usar os recursos do zsh-histdb:
-ZSH_HISTDB="${HOME}/.oh-my-zsh/custom/plugins/zsh-histdb/sqlite-history.zsh"
-[[ -f "${ZSH_HISTDB}" ]] && source "${ZSH_HISTDB}" 2> /dev/null
-autoload -Uz add-zsh-hook
-
-# Comandos para integrar o zsh-histdb e o zsh-autosuggestions:
-_zsh_autosuggest_strategy_histdb_top_here() {
-    local query="select commands.argv from
-history left join commands on history.command_id = commands.rowid
-left join places on history.place_id = places.rowid
-where places.dir LIKE '$(sql_escape $PWD)%'
-and commands.argv LIKE '$(sql_escape $1)%'
-group by commands.argv order by count(*) desc limit 1"
-    suggestion=$(_histdb_query "$query")
-}
-
-_zsh_autosuggest_strategy_histdb_top() {
-    local query="select commands.argv from
-history left join commands on history.command_id = commands.rowid
-left join places on history.place_id = places.rowid
-where commands.argv LIKE '$(sql_escape $1)%'
-group by commands.argv
-order by places.dir != '$(sql_escape $PWD)', count(*) desc limit 1"
-    suggestion=$(_histdb_query "$query")
-}
-
-ZSH_AUTOSUGGEST_STRATEGY=histdb_top
+conda activate env1
