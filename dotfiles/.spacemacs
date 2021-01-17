@@ -35,10 +35,9 @@ This function should only modify configuration layer settings."
    '(
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
-                      auto-completion-tab-key-behavior 'complete)
-     (c-c++ :variables
-            c-c++-backend 'lsp-clangd
-            c-c++-lsp-enable-semantic-highlight 'rainbow)
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle)
+     (c-c++ :variables c-c++-backend 'lsp-clangd)
      dap
      emacs-lisp
      (ess :variables ess-r-backend 'lsp)
@@ -52,7 +51,9 @@ This function should only modify configuration layer settings."
                  javascript-import-tool 'import-js
                  js2-basic-offset 4
                  js2-mode-show-strict-warnings nil)
-     (lsp :variables lsp-ui-doc-enable nil)
+     (lsp :variables
+          lsp-headerline-breadcrumb-enable nil
+          lsp-ui-doc-enable nil)
      lua
      markdown
      (php :variables php-backend 'lsp)
@@ -79,13 +80,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(jbeans-theme
-                                      molokai-theme
-                                      monokai-theme
-                                      poly-R
-                                      poly-markdown
-                                      polymode
-                                      vterm)
+   dotspacemacs-additional-packages '(vterm)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -153,7 +148,7 @@ It should only modify the values of Spacemacs settings."
    ;; Setting this >= 1 MB should increase performance for lsp servers
    ;; in emacs 27.
    ;; (default (* 1024 1024))
-   dotspacemacs-read-process-output-max (* 3072 3072)
+   dotspacemacs-read-process-output-max (* 10240 10240)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -183,7 +178,7 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
 
    ;; If non-nil show the version string in the Spacemacs buffer. It will
    ;; appear as (spacemacs version)@(emacs version)
@@ -224,10 +219,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(jbeans
-                         spacemacs-dark
-                         molokai
-                         monokai)
+   dotspacemacs-themes '(spacemacs-dark)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -240,11 +232,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
-   dotspacemacs-colorize-cursor-according-to-state t
+   dotspacemacs-colorize-cursor-according-to-state nil
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("JetBrainsMono Nerd Font Mono"
-                               :size 18
+   dotspacemacs-default-font '("Hasklug Nerd Font Mono"
+                               :size 16
                                :weight normal
                                :width normal)
 
@@ -280,9 +272,6 @@ It should only modify the values of Spacemacs settings."
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
 
-   ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ t
-
    ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
    ;; there. (default t)
    dotspacemacs-retain-visual-state-on-shift nil
@@ -311,7 +300,7 @@ It should only modify the values of Spacemacs settings."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location nil
 
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
@@ -323,13 +312,13 @@ It should only modify the values of Spacemacs settings."
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.5
+   dotspacemacs-which-key-delay 1.0
 
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
    ;; (default 'bottom)
-   dotspacemacs-which-key-position 'right-then-bottom
+   dotspacemacs-which-key-position 'bottom
 
    ;; Control where `switch-to-buffer' displays the buffer. If nil,
    ;; `switch-to-buffer' displays the buffer in the current window even if
@@ -372,10 +361,10 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-inactive-transparency 90
 
    ;; If non-nil show the titles of transient states. (default t)
-   dotspacemacs-show-transient-state-title t
+   dotspacemacs-show-transient-state-title nil
 
    ;; If non-nil show the color guide hint for transient state keys. (default t)
-   dotspacemacs-show-transient-state-color-guide t
+   dotspacemacs-show-transient-state-color-guide nil
 
    ;; If non-nil unicode symbols are displayed in the mode line.
    ;; If you use Emacs as a daemon and wants unicode characters only in GUI set
@@ -423,7 +412,7 @@ It should only modify the values of Spacemacs settings."
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
-   dotspacemacs-highlight-delimiters 'all
+   dotspacemacs-highlight-delimiters 'current
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
@@ -480,7 +469,7 @@ It should only modify the values of Spacemacs settings."
    ;; indent handling like has been reported for `go-mode'.
    ;; If it does deactivate it here.
    ;; (default t)
-   dotspacemacs-use-clean-aindent-mode t
+   dotspacemacs-use-clean-aindent-mode nil
 
    ;; If non-nil shift your number row to match the entered keyboard layout
    ;; (only in insert state). Currently supported keyboard layouts are:
@@ -516,6 +505,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq byte-compile-warnings '(not obsolete))
   (setq exec-path-from-shell-check-startup-files nil)
   (setq-default git-magit-status-fullscreen t)
   )
@@ -533,12 +523,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-  (global-git-commit-mode t)
   (setq magit-repository-directories '(("~/repos/" . 1)))
-  ;; (setq-default c-basic-offset 4)
-  ;; (setq-default inferior-R-program-name "~/miniconda3/envs/env3/bin/R")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
